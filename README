@@ -1,0 +1,63 @@
+                                Cauia Alexandru 324CB
+                                Tema1 Proiectarea Algoritmilor
+
+1.
+    La acest task am utilizat parcurgerea Z care deja era rezolvata in labul 1. Eu
+    m-am inspirat din lab si am mai modificat unele chestii.
+    Metoda "inCadran" returneaza un bool care imi spune daca punctul (x,y) se afla in
+    cadran. Pentru asta verific ca x sa se afle intre primele coordonate ale celor 2
+    puncte, iar y intre coordonatele de pe pozitia 2 a punctelor.
+
+    In metoda "walshValue" imi creez niste veriabile necesare pentru a cauta in
+    fiecare dintre cele 4 cadrane cu ajutorul functiei de mai sus. Ideea e ca apelez
+    recursiv metoda cu o jumate din dimensiunea initiala a matricii. La fiecare apel
+    imi micsorez "aria" de cautare plecand intr-un cadran, pana ajung la o cifra(conditia
+    de iesire din recursivitate).
+    Conform formulei exercitiului, in cadranul 4, valorile sunt schimbate. Pentru asta
+    am un parametru "value" care il schimb la fiecare apel recursiv pentru cadranul
+    "dreapta-jos". Daca value inainte de apel = 0, apelez metoda cu value = 1 si invers.
+    Complexitatea parcurgerii Z este O(n).
+
+2.
+    Metoda "neOfApparitions" intoarce un arrayList de int-uri egal ca dimenisune
+    cu cate cuvinte sunt in lista "words". Pentru fiecare cuvant calculez (de cate ori
+    apare o litera in acel cuvant) - (de cate ori nu apare), si adaug numarul in array.
+
+    Metoda "maxNrWordsConcat" calculeaza numarul maxim de cuvinte din lista, care
+    in urma concatenarii lor, o litera este dominanta. Ideea e urmatoarea: cu un for
+    parcurg toate literele de la a la z si apelez functia de mai sus. Apoi, ArrayList-ul
+    care il intoarce funtia, il sortez descrescator, pentru ca am nevoie ca diefrentele
+    de aparitii dezavantajoase sa fie la sfarsit. In urmatorul pas, cu un alt for incep
+    sa adun cifrele din vectorul sortat descrescator si la fiecare adunare sa verific daca
+    e mai mare ca 0. Daca da, incrementez un acumulator. Daca ajunge sa fie < 0,
+    inseamna ca urmatorul cuvant daca il adaug deja cu va mai fi acel caracter dominant,
+    si ies din for. Accumulutarolui ii aplic un Math.max cu o variabila care initial e 0.
+    Daca la urmatoarea iteratie se gaseste o litera mai dominanta, Math.max va pastra
+    acel acumulator. La sfarsit returnez "maxWords".
+    Complexitatea O(nlogn)
+
+3.
+    Metoda "divisors" imi intoarce un arrayList cu divizorii numarului primit ca parametru.
+    Complexitatea metodei e O(sqrt(n)).
+
+    Metoda "nrOfOperations" gaseste nr de pasi minimi prin care putem ajunge la un numar
+    (de la 1 pana la 10^5); Pentru asta parcurg vectorul de numere si cu inca un for
+    adun pe rand numarul cu cate un divizor de al lui si rezultatul il pastrez in "k".
+    Apoi verific daca in vectorul rezultat la poz k este 0 sau daca e mai mare ca cifra
+    de pe (poz i) + 1. Daca e mai mare, inseamna ca am gasit o cale mai scurta de la alt
+    numar prin care putem ajunge la el si inlocuim cu vect[i] +1. Adica pozitia la care
+    ma aflu, daca mai adun un divizor, inseamna ca am am facut un pas.
+
+    Obtinand array-ul intors de metoda "nrOfOperations", problema se reduce la
+    "problema rucsacului". Ca sa reduc la o complexitate mai mica am folosit un
+    vector. Complexitatea fiind O(K).
+
+    Vectorul dp la pozitia k va avea numarul de puncte maxim la un moment dat.
+    Valoarea se va stabili independenta de functia max care e aplicata intre valoarea
+    curenta de pe pozitia k si nr de puncte format din dp[k capacitatea maxima la iteratie curenta - nr de pași]
+    prin ce obținem puncte pentru capacitatea rasa liberă + punctele pentru nr de pași de la iteratia curenta/cu
+    care am scăzut din capacitatea.
+    La fiecare iteratie max, va genera o noua valoare(daca e cazul) si o va inlocui
+    in vector. La sfarsit returnez valoarea de pe pozitia K(capacitatea max a
+    rucsacului).
+
